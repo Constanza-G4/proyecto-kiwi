@@ -1,0 +1,63 @@
+{{#each data}}
+    <section class="pet">
+        <div class="pet__container">
+            <div class="pet__img">
+                <h2>{{name}}</h2>
+                <img src="img/mascota.png">
+            </div>
+            <div class="pet__bar">
+                <div class="pet__bar--eat" onclick="hungry(20)">
+                    <h3>Hambre</h3>
+                    <p>{{porcentaje hungry}}</p>
+                </div>
+                <div class="pet__bar--love" onclick="love(20)">
+                    <h3>Amor</h3>
+                    <p>{{porcentaje love}}</p>
+                </div>
+                <div class="pet__bar--shower" onclick="shower(20)">
+                    <h3>Baño</h3>
+                    <p>{{porcentaje shower}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{{else}}
+    NO HAY DATOS
+{{/each}}
+
+<script>
+    //Comida
+    const hungry = async (food) =>{
+        const fetchData = await fetch(`/mascota/food/${food}`, {
+            method: 'put'
+        })
+        const data = await fetchData.json()
+        if (data.success){
+            location.reload()
+        }
+    }
+
+    //Cariño
+    const love = async (love) =>{
+        const fetchData = await fetch(`/mascota/love/${love}`, {
+            method: 'put'
+        })
+        const data = await fetchData.json()
+        if (data.success){
+            location.reload()
+        }
+    }
+
+    const shower = async (shower) =>{
+        const fetchData = await fetch(`/mascota/shower/${shower}`, {
+            method: 'put'
+        })
+        const data = await fetchData.json()
+        if (data.success){
+            location.reload()
+        }
+    }
+
+
+
+</script>
